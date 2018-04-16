@@ -32,6 +32,12 @@ $router->get('/boards/{board}/list/{list}','ListController@show');
 $router->put('/boards/{board}/list/{list}','ListController@update');
 $router->delete('/boards/{board}/list/{list}','ListController@destroy');
 
+$router->get('/boards/{board}/list/{list}/card','CardController@index');
+$router->post('/boards/{board}/list/{list}/card','CardController@store');
+$router->get('/boards/{board}/list/{list}/card/{card}','CardController@show');
+$router->put('/boards/{board}/list/{list}/card/{card}','CardController@update');
+$router->delete('/boards/{board}/list/{list}/card/{card}','CardController@destroy');
+
 
 
 
