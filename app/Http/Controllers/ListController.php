@@ -21,7 +21,7 @@ class ListController extends Controller
 
     public function index($boardId)
     {
-        $board=Board::find($boardId);
+        $board = Board::find($boardId);
           if (Auth::user()->id !== $board->user_id) {
             return response()->json([
                 'status' => 'Error', 
@@ -32,9 +32,10 @@ class ListController extends Controller
         return response()->json(['lists'=>$board->lists]);
     }
 
-    public function show($boardId,$listId)
+    public function show($boardId, $listId)
     {
-        $board=Board::find($boardId);
+        $board = Board::find($boardId);
+
           if (Auth::user()->id !== $board->user_id) {
             return response()->json([
                 'status' => 'Error', 
@@ -104,9 +105,10 @@ class ListController extends Controller
         $list=$board->lists()->find($listId);
 
         if ($list->delete()) {
-            return response()->json(
+            return response()->json([
                 'status' => 'Success', 
-                'message' => 'List Deleted Successfully']);
+                'message' => 'List Deleted Successfully'
+            ], 200);
         }
 
         return response()->json([
