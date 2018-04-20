@@ -20,7 +20,10 @@ class BoardController extends Controller
 
     public function index()
     {
-    	return Auth::user()->boards;
+        $boardsData = Auth::user()->boards->load('lists.cards');
+        return response()->json([
+            'boards'=> $boardsData
+        ], 200);
     }
 
     public function show($id)
