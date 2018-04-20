@@ -17,6 +17,7 @@ $router->get('/', function () use ($router) {
 
 $router->post('/login','AuthController@login');
 $router->get('/logout','AuthController@logout');
+$router->get('/users/{token}','AuthController@profile');
 $router->post('/register','AuthController@register');
 
 $router->get('/boards','BoardController@index');
@@ -40,4 +41,7 @@ $router->delete('/boards/{board}/list/{list}/card/{card}','CardController@destro
 
 
 
-
+// $router->get('/users/{token}', function($token){
+// 	$user = User::where('api_token', $token)->first();
+// 	return response(['user'=>$user]);
+// });

@@ -73,7 +73,7 @@ class CardController extends Controller
         ]);
 
         return response()->json(['message' => 'Success'], 200);
-    }
+    } 
 
     public function update(Request $request, $boardId, $listId, $cardId)
     {

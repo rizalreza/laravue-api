@@ -18,6 +18,13 @@ class AuthController extends Controller
         //
     }
 
+    public function profile($token){
+
+    $user = User::where('api_token', $token)->first();
+
+    return response(['user'=>$user]);
+
+    }
     public function register(Request $request)
     {
 
