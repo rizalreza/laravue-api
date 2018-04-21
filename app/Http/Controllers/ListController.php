@@ -63,11 +63,14 @@ class ListController extends Controller
             ], 401);
         }
 
-        $board->lists()->create([
+        $newList = $board->lists()->create([
             'name'    => $request->name,
         ]);
 
-        return response()->json(['message' => 'Success'], 200);
+        return response()->json([
+            'message' => 'Success',
+            'list' => $newList
+        ], 200);
     }
 
     public function update(Request $request, $boardId, $listId)
