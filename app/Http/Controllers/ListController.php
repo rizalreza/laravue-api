@@ -86,7 +86,8 @@ class ListController extends Controller
             ], 401);
         }
 
-        $board->update($request->all());
+        $board->lists()->find($listId)->update($request->all());
+        $newList = Lists::find($listId);
 
         return response()->json([
             'message' => 'Success', 
