@@ -30,7 +30,7 @@ class CardController extends Controller
             ], 401);
         }
 
-        $list=$board->lists()->find($listId);
+        $list = $board->lists()->find($listId);
         return response()->json(['cards'=>$list->cards]);
     }
 
@@ -67,27 +67,30 @@ class CardController extends Controller
             ], 401);
         }
 
-        $board->lists()->find($listId)->cards()->create([
-            'name'=> $request->name,
-            'description'=> $request->description,
+        $card = $board->lists()->find($listId)->cards()->create([
+            'name' => $request->name,
+
         ]);
 
-        return response()->json(['message' => 'Success'], 200);
+        return response()->json([
+          'message' => 'Success',
+          'card' => $card
+        ], 200);
     } 
 
-    public function update(Request $request, $boardId, $listId, $cardId)
+    public function update(Request $request, $cardId)
     {
         $this->validate($request,['name'=>'required']);
 
-        $board = Board::find($boardId);
-        if (Auth::user()->id !== $board->user_id) {
+        $card = Card::find($cardId);
+
+        if (Auth::user()->id !== $card->list->board->user_id) {
             return response()->json([
             	'status' => 'Error', 
             	'message' => 'Unauthorized, content not found or owned by other user'
             ], 401);
         }
         
-        $card=$board->lists()->find($listId)->cards()->find($cardId);
         $card->update($request->all());
 
         return response()->json([
@@ -96,18 +99,17 @@ class CardController extends Controller
         ], 200);
     }
 
-    public function destroy($boardId, $listId, $cardId)
+    public function destroy($cardId)
     {
-        $board=Board::find($boardId);
+        $card = Card::find($cardId);
 
-        if(Auth::user()->id !== $board->user_id) {
+        if (Auth::user()->id !== $card->list->board->user_id) {
             return response()->json([
-            	'status'=>'Error',
-            	'message'=> 'Unauthorized, content not found or owned by other user'
+              'status' => 'Error', 
+              'message' => 'Unauthorized, content not found or owned by other user'
             ], 401);
         }
 
-        $card=$board->lists()->find($listId)->cards()->find($cardId);
 
         if ($card->delete()) {
             return response()->json([
