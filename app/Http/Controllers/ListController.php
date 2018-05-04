@@ -91,7 +91,7 @@ class ListController extends Controller
 
         return response()->json([
             'message' => 'Success', 
-            'board' => $board
+            'list' => $newList
         ], 200);
     }
 

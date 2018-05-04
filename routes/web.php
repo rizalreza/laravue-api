@@ -35,13 +35,7 @@ $router->delete('/boards/{board}/list/{list}','ListController@destroy');
 
 $router->get('/boards/{board}/list/{list}/card','CardController@index');
 $router->post('/boards/{board}/list/{list}/card','CardController@store');
-$router->get('/boards/{board}/list/{list}/card/{card}','CardController@show');
-$router->put('/boards/{board}/list/{list}/card/{card}','CardController@update');
-$router->delete('/boards/{board}/list/{list}/card/{card}','CardController@destroy');
+$router->get('/card/{card}','CardController@show');
+$router->put('/card/{card}','CardController@update');
+$router->delete('/card/{card}','CardController@destroy');
 
-
-
-// $router->get('/users/{token}', function($token){
-// 	$user = User::where('api_token', $token)->first();
-// 	return response(['user'=>$user]);
-// });
