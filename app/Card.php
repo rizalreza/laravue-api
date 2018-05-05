@@ -15,6 +15,6 @@ class Card extends Model {
 
     public function list()
     {
-    	return $this->belongsTo(Lists::class);
+    	return $this->belongsTo(Lists::class, 'lists_id');
     }
 }

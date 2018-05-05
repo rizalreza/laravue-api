@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Board;
+use App\Card;
 use App\Lists;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,7 +81,7 @@ class CardController extends Controller
 
     public function update(Request $request, $cardId)
     {
-        $this->validate($request,['name'=>'required']);
+        // $this->validate($request,['name'=>'required']);
 
         $card = Card::find($cardId);
 
